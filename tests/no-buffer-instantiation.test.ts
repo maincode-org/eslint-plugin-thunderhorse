@@ -7,5 +7,5 @@ const ruleTester = new ESLintUtils.RuleTester({
 
 ruleTester.run('no-buffer-instantiation', rule, {
     valid: [],
-    invalid: [{ code: "const a = new Buffer(10)", errors: [{ messageId: 'error' }] }],
+    invalid: [{ code: "const a = new Buffer(10)", errors: [{ messageId: "error" }] }],
 });

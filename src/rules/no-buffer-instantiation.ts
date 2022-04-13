@@ -1,4 +1,4 @@
-import { ESLintUtils } from '@typescript-eslint/utils';
+import {AST_NODE_TYPES, ESLintUtils} from '@typescript-eslint/utils';
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
@@ -6,7 +6,7 @@ export const rule = createRule({
     create(context) {
         return {
             NewExpression(node) {
-                if (node.callee.type === "Identifier" && node.callee.name === 'Buffer') {
+                if (node.callee.type === AST_NODE_TYPES.Identifier && node.callee.name === 'Buffer') {
                     context.report({
                         messageId: 'error',
                         node: node,
