@@ -1,6 +1,6 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
-import rule from '../src/rules/no-unsafe-file-access';
 import { readFileSync } from 'fs';
+import rule from '../src/rules/no-unsafe-file-access';
 
 const ruleTester = new ESLintUtils.RuleTester({
     parser: '@typescript-eslint/parser',

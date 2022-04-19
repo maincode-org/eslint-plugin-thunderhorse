@@ -1,7 +1,7 @@
 import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils';
 import { traceValue } from "eslint-rule-dev-toolkit";
 
-// Relevant file system members.
+// Relevant fs library members.
 enum EFSMembers {
     READFILE = 'readFile',
     READFILESYNC = 'readFileSync'
@@ -9,12 +9,12 @@ enum EFSMembers {
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// Nodejs.org documentation https://nodejs.org/api/fs.html#fsreadfilepath-options-callback
+// Nodejs.org documentation https://nodejs.org/api/fs.html#filehandlereadfileoptions
 export const rule = createRule({
     create(context) {
         return {
             CallExpression(node) {
-                // ex. readFile() or fs.readFile()
+                // for example readFile() or fs.readFile()
                 if (isCallExpressionMemberFS(node) || isCallExpressionFS(node)) {
                     const { result } = traceValue(node.arguments[0], context, (node) => node.type === AST_NODE_TYPES.Literal);
 
@@ -35,7 +35,7 @@ export const rule = createRule({
             recommended: 'warn',
         },
         messages: {
-            error: 'Found unsafe argument provided to fs.read-file. Specify path via string.',
+            error: 'Found unsafe argument provided to fs.readFile. Specify path via string.',
         },
         type: 'problem',
         schema: [],
