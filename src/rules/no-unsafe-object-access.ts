@@ -6,9 +6,9 @@ const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${n
 export const rule = createRule({
     create(context) {
         return {
-            CallExpression(node) {
-                if (node.callee.type === "Identifier" && node.callee.name === "require") {
-                    const { result } = traceValue(node.arguments[0], context, (node) => node.type === AST_NODE_TYPES.Literal);
+            MemberExpression(node) {
+                if (node.computed) {
+                    const { result } = traceValue(node.property, context, (node) => node.type === AST_NODE_TYPES.Literal);
 
                     if (!result.isVerified) {
                         context.report({
@@ -20,14 +20,14 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-unsafe-require',
+    name: 'no-unsafe-object-access',
     meta: {
         docs: {
-            description: 'Using anything but a string as an argument to require() is unsafe. Specify libraries via strings.',
+            description: 'Using anything but a string to access object or class members are unsafe. Specify members via strings.',
             recommended: 'warn',
         },
         messages: {
-            error: 'Found unsafe argument provided to require(). Specify libraries via strings.',
+            error: 'Found unsafe argument provided to object or class. Specify members via strings.',
         },
         type: 'problem',
         schema: [],
