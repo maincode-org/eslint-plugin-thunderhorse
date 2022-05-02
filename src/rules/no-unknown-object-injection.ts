@@ -20,7 +20,7 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-unsafe-object-access',
+    name: 'no-unknown-object-injection',
     meta: {
         docs: {
             description: 'Using anything but a string to access object or class members are unsafe. Specify members via strings.',

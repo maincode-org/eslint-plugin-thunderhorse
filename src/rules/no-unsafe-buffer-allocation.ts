@@ -2,7 +2,7 @@ import {AST_NODE_TYPES, ESLintUtils} from '@typescript-eslint/utils';
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// nodejs.org documentation https://nodejs.org/api/buffer.html#static-method-bufferallocsize-fill-encoding
+// Nodejs.org documentation https://nodejs.org/api/buffer.html#static-method-bufferallocsize-fill-encoding
 export const rule = createRule({
     create(context) {
         return {

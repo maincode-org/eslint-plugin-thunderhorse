@@ -21,7 +21,7 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-unsafe-comparison',
+    name: 'no-timing-attack',
     meta: {
         docs: {
             description: 'Do not make comparisons on passwords, secrets etc.',

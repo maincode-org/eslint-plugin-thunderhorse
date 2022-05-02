@@ -1,11 +1,11 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
-import rule from '../src/rules/no-unsafe-comparison';
+import rule from '../src/rules/no-timing-attack';
 
 const ruleTester = new ESLintUtils.RuleTester({
     parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run('no-unsafe-comparison', rule, {
+ruleTester.run('no-timing-attack', rule, {
     valid: [
         { code: "const a = name === 'James'" },
         { code: "const a = age === 12" },

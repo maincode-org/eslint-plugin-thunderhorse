@@ -20,7 +20,7 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-unsafe-require',
+    name: 'no-unknown-source-in-require',
     meta: {
         docs: {
             description: 'Using anything but a string as an argument to require() is unsafe. Specify libraries via strings.',
