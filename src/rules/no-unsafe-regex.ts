@@ -1,5 +1,6 @@
 import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
 import { traceValue } from "eslint-rule-dev-toolkit";
+import safe from 'safe-regex';
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
@@ -13,7 +14,12 @@ export const rule = createRule({
 
                     if (!result.isVerified) {
                         context.report({
-                            messageId: 'error',
+                            messageId: 'nonLiteralError',
+                            node: node,
+                        });
+                    } else if (node.arguments[0].type === AST_NODE_TYPES.Literal && !safe(node.arguments[0].value)) {
+                        context.report({
+                            messageId: 'exponentialTimeError',
                             node: node,
                         });
                     }
@@ -28,7 +34,8 @@ export const rule = createRule({
             recommended: 'warn',
         },
         messages: {
-            error: 'Found unsafe argument provided to new RegExp(). Specify expression via string.',
+            nonLiteralError: 'Found unsafe argument provided to new RegExp(). Specify expression via string.',
+            exponentialTimeError: 'Found exponential time Regex.',
         },
         type: 'problem',
         schema: [],

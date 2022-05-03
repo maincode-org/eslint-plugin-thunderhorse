@@ -13,7 +13,17 @@ ruleTester.run('no-unsafe-regex', rule, {
         { code: readFileSync("tests/target-files/no-unsafe-regex/safe-array.js", "utf-8") }
     ],
     invalid: [
-        { code: readFileSync("tests/target-files/no-unsafe-regex/unsafe-user-input.js", "utf-8"), errors: [{ messageId: "error" }] },
-        { code: readFileSync("tests/target-files/no-unsafe-regex/unsafe-fetch.js", "utf-8"), errors: [{ messageId: "error" }] },
+        {
+            code: readFileSync("tests/target-files/no-unsafe-regex/unsafe-user-input.js", "utf-8"),
+            errors: [{ messageId: "nonLiteralError" }]
+        },
+        {
+            code: readFileSync("tests/target-files/no-unsafe-regex/unsafe-fetch.js", "utf-8"),
+            errors: [{ messageId: "nonLiteralError" }]
+        },
+        {
+            code: readFileSync("tests/target-files/no-unsafe-regex/unsafe-exponential-time-regex.js", "utf-8"),
+            errors: [{ messageId: "exponentialTimeError" }]
+        },
     ],
 });

@@ -1,12 +1,12 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { readFileSync } from "fs";
-import rule from '../src/rules/no-unknown-source-in-require';
+import rule from '../src/rules/no-unknown-src-in-require';
 
 const ruleTester = new ESLintUtils.RuleTester({
     parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run('no-unknown-source-in-require', rule, {
+ruleTester.run('no-unknown-src-in-require', rule, {
     valid: [
         { code: readFileSync("tests/target-files/no-unknown-source-in-require/safe-string.js", "utf-8") },
         { code: readFileSync("tests/target-files/no-unknown-source-in-require/safe-variable.js", "utf-8") },

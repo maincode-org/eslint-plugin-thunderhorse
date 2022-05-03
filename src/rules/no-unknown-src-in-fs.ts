@@ -28,7 +28,7 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-unsafe-file-access',
+    name: 'no-unknown-src-in-fs',
     meta: {
         docs: {
             description: 'File access via anything but strings is unsafe. Specify paths via strings.',

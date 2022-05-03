@@ -1,12 +1,12 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { readFileSync } from 'fs';
-import rule from '../src/rules/no-unsafe-file-access';
+import rule from '../src/rules/no-unknown-src-in-fs';
 
 const ruleTester = new ESLintUtils.RuleTester({
     parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run('no-unsafe-file-access', rule, {
+ruleTester.run('no-unknown-src-in-fs', rule, {
     valid: [
         // readFile()
         { code: readFileSync("tests/target-files/no-unsafe-file-access/read-file/safe-variable.js", "utf-8") },

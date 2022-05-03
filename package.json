@@ -25,6 +25,7 @@
     "@typescript-eslint/utils": "^5.19.0",
     "eslint": "^8.13.0",
     "eslint-rule-dev-toolkit": "file:../rule-dev-toolkit",
+    "safe-regex": "^2.1.1",
     "ts-node": "^10.7.0"
   },
   "devDependencies": {
