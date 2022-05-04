@@ -25,7 +25,7 @@ export const rule = createRule({
             recommended: 'warn',
         },
         messages: {
-            error: 'Found assignment of object.escapeMarkup to false',
+            error: 'Found assignment of object.escapeMarkup to false.',
         },
         type: 'problem',
         schema: [],
