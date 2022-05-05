@@ -23,7 +23,7 @@ export const rule = createRule({
             recommended: 'warn',
         },
         messages: {
-            error: '',
+            error: 'Found use of HTTP cookies.',
         },
         type: 'problem',
         schema: [],

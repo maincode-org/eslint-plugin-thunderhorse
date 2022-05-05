@@ -2,16 +2,14 @@ import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils'
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// Nodejs.org documentation https://nodejs.org/api/tls.html#class-tlstlssocket.
 export const rule = createRule({
     create(context) {
-        // List of all identifiers that gets assigned to object with property "rejectUnauthorized: false".
-        let tlsOptions: TSESTree.Identifier[] = [];
+        let serializeIdentifier: TSESTree.Identifier = undefined;
+        let optionsIdentifiers: TSESTree.Identifier[] = [];
 
         return {
-            NewExpression(node) {
-                if (node.callee.type !== AST_NODE_TYPES.MemberExpression) return;
-                if (node.callee.object.type !== AST_NODE_TYPES.Identifier || node.callee.object.name !== "tls") return;
+            CallExpression(node) {
+                if (node.callee.type !== AST_NODE_TYPES.Identifier || node.callee.name !== serializeIdentifier.name) return;
 
                 if (node.arguments.length > 1 && node.arguments[1].type === AST_NODE_TYPES.ObjectExpression) {
                     if (optionsAreUnsafe(node.arguments[1].properties)) {
@@ -24,7 +22,8 @@ export const rule = createRule({
                     &&
                     node.arguments[1].type === AST_NODE_TYPES.Identifier
                     &&
-                    (tlsOptions.length > 0 && findIdentifierInList(tlsOptions, node.arguments[1]))) {
+                    (optionsIdentifiers.length > 0 && findIdentifierInList(optionsIdentifiers, node.arguments[1]))
+                ) {
                     context.report({
                         messageId: 'error',
                         node: node,
@@ -32,22 +31,30 @@ export const rule = createRule({
                 }
             },
             VariableDeclarator(node) {
-                if (node.init.type !== AST_NODE_TYPES.ObjectExpression) return;
-                if (optionsAreUnsafe(node.init.properties)) {
+                if (node.init.type !== AST_NODE_TYPES.ObjectExpression && node.init.type !== AST_NODE_TYPES.CallExpression) return;
+
+                if (node.init.type === AST_NODE_TYPES.ObjectExpression) {
+                    if (optionsAreUnsafe(node.init.properties)) {
+                        if (node.id.type !== AST_NODE_TYPES.Identifier) return;
+                        optionsIdentifiers = [...optionsIdentifiers, node.id];
+                    }
+                } else {
+                    if (node.init.callee.type !== AST_NODE_TYPES.Identifier || node.init.callee.name !== "require") return;
+                    if (node.init.arguments[0].type !== AST_NODE_TYPES.Literal || node.init.arguments[0].value !== "serialize-javascript") return;
                     if (node.id.type !== AST_NODE_TYPES.Identifier) return;
-                    tlsOptions = [...tlsOptions, node.id];
+                    serializeIdentifier = node.id;
                 }
-            }
+            },
         };
     },
-    name: 'no-disabled-rejectUnauthorized',
+    name: 'no-unsafe-serialize-javascript',
     meta: {
         docs: {
-            description: 'Setting rejectUnauthorized to false will not authorize socket messages.',
+            description: 'Serializing Javascript with the option unsafe set to true is unsafe. Set option unsafe to false.',
             recommended: 'warn',
         },
         messages: {
-            error: 'Found rejectUnauthorized set to false',
+            error: 'Found unsafe set to true when serializing.',
         },
         type: 'problem',
         schema: [],
@@ -62,7 +69,7 @@ const optionsAreUnsafe = (options: TSESTree.ObjectLiteralElement[]): boolean => 
         if (property.type !== AST_NODE_TYPES.Property) return;
         if (property.key.type !== AST_NODE_TYPES.Identifier) return;
         if (property.value.type !== AST_NODE_TYPES.Literal) return;
-        return property.key.name === "rejectUnauthorized" && property.value.value === false
+        return property.key.name === "unsafe" && property.value.value === true
     });
 }
 

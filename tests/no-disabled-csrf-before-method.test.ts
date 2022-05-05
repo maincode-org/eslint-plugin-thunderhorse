@@ -11,7 +11,7 @@ ruleTester.run('no-disabled-csrf-before-method', rule, {
         { code: readFileSync("tests/target-files/no-disabled-csrf-before-method/safe.js", "utf-8") }
     ],
     invalid: [
-        { code: readFileSync("tests/target-files/no-disabled-csrf-before-method/unsafe.js", "utf-8"), errors: [{ messageId: "error" }] },
+        { code: readFileSync("tests/target-files/no-disabled-csrf-before-method/unsafe-fetch.js", "utf-8"), errors: [{ messageId: "error" }] },
         { code: readFileSync("tests/target-files/no-disabled-csrf-before-method/unsafe-import-rename.js", "utf-8"), errors: [{ messageId: "error" }] }
     ],
 });
