@@ -1,4 +1,4 @@
-import { AST_NODE_TYPES, ESLintUtils } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
@@ -8,8 +8,8 @@ const DEFAULT_EXCEPTIONS = [/^http:(\/|\\u002f){2}localhost(:|\/|\\u002f)*/i];
 export const rule = createRule({
     create(context) {
         const options = context.options[0] || {};
-        const blocklist = (options.blocklist || DEFAULT_BLOCKLIST).map((pattern) => { return new RegExp(pattern, "i"); });
-        const exceptions = (options.exceptions || DEFAULT_EXCEPTIONS).map((pattern) => { return new RegExp(pattern, "i"); });
+        const blocklist = (options.blocklist || DEFAULT_BLOCKLIST).map((pattern) => new RegExp(pattern, "i"));
+        const exceptions = (options.exceptions || DEFAULT_EXCEPTIONS).map((pattern) => new RegExp(pattern, "i"));
 
         const matches = (patterns, value) => patterns.find((re) => re.test(value)) !== undefined;
 

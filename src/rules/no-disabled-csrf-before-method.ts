@@ -2,11 +2,11 @@ import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils'
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-let isCSRFDeclared = false;
-let expressIdentifier: TSESTree.Identifier = undefined;
-
 export const rule = createRule({
     create(context) {
+        let isCSRFDeclared = false;
+        let expressIdentifier: TSESTree.Identifier = undefined;
+
         return {
             ImportDeclaration(node) {
                 if (node.source.type !== AST_NODE_TYPES.Literal) return;

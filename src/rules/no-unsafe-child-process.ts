@@ -3,12 +3,12 @@ import { traceValue } from "eslint-rule-dev-toolkit";
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// List of child-process members
-let members: (TSESTree.Identifier)[] = [];
-
 // Nodejs.org documentation https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback
 export const rule = createRule({
     create(context) {
+        // List of child-process members
+        let members: (TSESTree.Identifier)[] = [];
+
         return {
             // Find the child-process member(s).
             VariableDeclarator(node) {

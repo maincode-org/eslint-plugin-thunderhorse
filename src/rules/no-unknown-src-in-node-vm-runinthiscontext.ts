@@ -8,6 +8,7 @@ export const rule = createRule({
     create(context) {
         let vmIdentifier: TSESTree.Identifier = undefined;
         let unsafeScriptIdentifier: TSESTree.Identifier = undefined;
+
         return {
             CallExpression(node) {
                 if (node.callee.type !== AST_NODE_TYPES.MemberExpression) return;
