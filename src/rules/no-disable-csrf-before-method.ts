@@ -33,7 +33,7 @@ export const rule = createRule({
             },
         };
     },
-    name: 'no-disabled-csrf-before-method',
+    name: 'no-disable-csrf-before-method',
     meta: {
         docs: {
             description: '',

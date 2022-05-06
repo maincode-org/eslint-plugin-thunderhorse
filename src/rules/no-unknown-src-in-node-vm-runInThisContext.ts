@@ -3,7 +3,7 @@ import { traceValue } from "eslint-rule-dev-toolkit";
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// Nodejs.org documentation https://nodejs.org/api/vm.html#vm-executing-javascript.
+// Nodejs.org documentation https://nodejs.org/api/vm.html#vm-executing-javascript
 export const rule = createRule({
     create(context) {
         let vmIdentifier: TSESTree.Identifier = undefined;
@@ -64,7 +64,7 @@ export const rule = createRule({
             }
         };
     },
-    name: 'no-unknown-src-in-node-vm-runinthiscontext',
+    name: 'no-unknown-src-in-node-vm-runInThisContext',
     meta: {
         docs: {
             description: 'Specifying a non-literal value as the script to execute in runInThisContext is unsafe.',

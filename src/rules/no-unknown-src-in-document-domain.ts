@@ -3,7 +3,7 @@ import { traceValue } from "eslint-rule-dev-toolkit";
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// Mozilla documentation https://developer.mozilla.org/en-US/docs/Web/API/Document/domain.
+// Mozilla documentation https://developer.mozilla.org/en-US/docs/Web/API/Document/domain
 export const rule = createRule({
     create(context) {
         return {

@@ -2,7 +2,7 @@ import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils'
 
 const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
 
-// Nodejs.org documentation https://nodejs.org/api/tls.html#class-tlstlssocket.
+// Nodejs.org documentation https://nodejs.org/api/tls.html#class-tlstlssocket
 export const rule = createRule({
     create(context) {
         // List of all identifiers that gets assigned to object with property "rejectUnauthorized: false".
@@ -40,7 +40,7 @@ export const rule = createRule({
             }
         };
     },
-    name: 'no-disabled-rejectUnauthorized',
+    name: 'no-disable-rejectUnauthorized',
     meta: {
         docs: {
             description: 'Setting rejectUnauthorized to false will not authorize socket messages.',

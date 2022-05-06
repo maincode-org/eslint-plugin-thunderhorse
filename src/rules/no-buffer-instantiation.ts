@@ -18,11 +18,11 @@ export const rule = createRule({
     name: 'no-buffer-instantiation',
     meta: {
         docs: {
-            description: 'Instantiation of Buffers are deprecated. Use Buffer.alloc().',
+            description: 'Instantiation of Buffers are deprecated. Use Buffer.from() or Buffer.alloc().',
             recommended: 'warn',
         },
         messages: {
-            error: 'Found new Buffer(). Use Buffer.alloc()',
+            error: 'Found new Buffer(). Use Buffer.from() or Buffer.alloc()',
         },
         type: 'problem',
         schema: [],

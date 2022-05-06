@@ -1,12 +1,12 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { readFileSync } from 'fs';
-import rule from '../src/rules/no-unknown-src-in-node-vm-runinthiscontext';
+import rule from '../src/rules/no-unknown-src-in-node-vm-runInThisContext';
 
 const ruleTester = new ESLintUtils.RuleTester({
     parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run('no-unknown-src-in-node-vm-runinthiscontext', rule, {
+ruleTester.run('no-unknown-src-in-node-vm-runInThisContext', rule, {
     valid: [
         { code: readFileSync("tests/target-files/no-unknown-src-in-node-vm-runinthiscontext/safe.js", "utf-8") },
         { code: readFileSync("tests/target-files/no-unknown-src-in-node-vm-runinthiscontext/safe-different-import-identifier.js", "utf-8") },
