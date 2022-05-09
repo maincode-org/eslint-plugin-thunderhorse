@@ -1,5 +1,5 @@
-import { exec } from "child_process";
+import { exec } from 'child_process';
 
-const userInput = prompt("Specify exec command");
+const userInput = prompt('Specify exec command');
 
 exec(userInput);

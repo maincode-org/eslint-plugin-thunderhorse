@@ -1,7 +1,8 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:eslint-plugin/recommended"
+    "plugin:eslint-plugin/recommended",
+    "prettier"
   ],
   "env": {
     "node": true,
@@ -9,7 +10,8 @@
     "browser": true
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   },
   "rules": {
     "no-unused-vars": "off"

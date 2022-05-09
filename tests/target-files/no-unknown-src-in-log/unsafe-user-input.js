@@ -1,2 +1,2 @@
-const userInput = prompt("Specify your website");
+const userInput = prompt('Specify your website');
 console.log(userInput);

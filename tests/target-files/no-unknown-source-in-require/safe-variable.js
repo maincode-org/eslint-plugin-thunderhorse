@@ -1,2 +1,2 @@
-const lib = "fs";
+const lib = 'fs';
 const fs = require(lib);

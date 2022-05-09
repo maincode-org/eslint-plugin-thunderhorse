@@ -1,1 +1,1 @@
-console.log("safe string");
+console.log('safe string');

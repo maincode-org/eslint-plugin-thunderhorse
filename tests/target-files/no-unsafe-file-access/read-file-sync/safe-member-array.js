@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
 const files = ['/etc/passwd', '/etc/my-file'];
 

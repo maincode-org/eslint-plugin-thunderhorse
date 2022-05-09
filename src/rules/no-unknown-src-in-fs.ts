@@ -1,62 +1,63 @@
 import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils';
-import { traceValue } from "eslint-rule-dev-toolkit";
+import { traceValue } from 'eslint-rule-dev-toolkit';
 
 // Relevant fs library members.
 enum EFSMembers {
-    READFILE = 'readFile',
-    READFILESYNC = 'readFileSync'
+  READFILE = 'readFile',
+  READFILESYNC = 'readFileSync',
 }
 
-const createRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`);
+const createRule = ESLintUtils.RuleCreator((name) => `https://example.com/rule/${name}`);
 
 // Nodejs.org documentation https://nodejs.org/api/fs.html#filehandlereadfileoptions
 export const rule = createRule({
-    create(context) {
-        return {
-            CallExpression(node) {
-                // for example readFile() or fs.readFile()
-                if (isCallExpressionMemberFS(node) || isCallExpressionFS(node)) {
-                    const { result } = traceValue(node.arguments[0], context, (node) => node.type === AST_NODE_TYPES.Literal);
+  create(context) {
+    return {
+      CallExpression(node) {
+        // for example readFile() or fs.readFile()
+        if (isCallExpressionMemberFS(node) || isCallExpressionFS(node)) {
+          const { result } = traceValue(node.arguments[0], context, (node) => node.type === AST_NODE_TYPES.Literal);
 
-                    if (!result.isVerified) {
-                        context.report({
-                            messageId: 'error',
-                            node: node,
-                        });
-                    }
-                }
-            },
-        };
+          if (!result.isVerified) {
+            context.report({
+              messageId: 'error',
+              node: node,
+            });
+          }
+        }
+      },
+    };
+  },
+  name: 'no-unknown-src-in-fs',
+  meta: {
+    docs: {
+      description: 'File access via anything but strings is unsafe. Specify paths via strings.',
+      recommended: 'warn',
     },
-    name: 'no-unknown-src-in-fs',
-    meta: {
-        docs: {
-            description: 'File access via anything but strings is unsafe. Specify paths via strings.',
-            recommended: 'warn',
-        },
-        messages: {
-            error: 'Found unsafe argument provided to fs.readFile. Specify path via string.',
-        },
-        type: 'problem',
-        schema: [],
+    messages: {
+      error: 'Found unsafe argument provided to fs.readFile. Specify path via string.',
     },
-    defaultOptions: [],
+    type: 'problem',
+    schema: [],
+  },
+  defaultOptions: [],
 });
 
 export default rule;
 
-
 const isCallExpressionMemberFS = (node: TSESTree.CallExpression) => {
-    if (node.callee.type !== AST_NODE_TYPES.MemberExpression) return false;
+  if (node.callee.type !== AST_NODE_TYPES.MemberExpression) return false;
 
-    const isMemberObjectFS = (node.callee as TSESTree.MemberExpression).object.type === AST_NODE_TYPES.Identifier
-        && ((node.callee as TSESTree.MemberExpression).object as TSESTree.Identifier).name === "fs";
+  const isMemberObjectFS =
+    (node.callee as TSESTree.MemberExpression).object.type === AST_NODE_TYPES.Identifier &&
+    ((node.callee as TSESTree.MemberExpression).object as TSESTree.Identifier).name === 'fs';
 
-    const isMemberPropertyReadFile = (node.callee as TSESTree.MemberExpression).property.type === AST_NODE_TYPES.Identifier
-        && stringInEnum(EFSMembers, ((node.callee as TSESTree.MemberExpression).property as TSESTree.Identifier).name);
+  const isMemberPropertyReadFile =
+    (node.callee as TSESTree.MemberExpression).property.type === AST_NODE_TYPES.Identifier &&
+    stringInEnum(EFSMembers, ((node.callee as TSESTree.MemberExpression).property as TSESTree.Identifier).name);
 
-    return isMemberObjectFS && isMemberPropertyReadFile;
-}
+  return isMemberObjectFS && isMemberPropertyReadFile;
+};
 
 const isCallExpressionFS = (node: TSESTree.CallExpression) => node.callee.type === AST_NODE_TYPES.Identifier && stringInEnum(EFSMembers, node.callee.name);
 

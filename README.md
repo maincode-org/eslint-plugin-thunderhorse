@@ -8,6 +8,7 @@ The philosophy behind this package is to gather all well-performing rules in a s
 See the **replaces** section at the end for insights on which packages this one aims to replace.
 
 ## Getting started
+
 - Requires Node.js >= 14
 - Requires ESLint >= 8
 
@@ -20,13 +21,10 @@ npm i -D eslint-plugin-itu-security
 For the default setup, please add the following to your `.eslintrc`:
 
 TODO: move the extends extras to our shareable config
+
 ```json
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:itu-security/recommended",
-    "plugin:anti-trojan-source/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:itu-security/recommended", "plugin:anti-trojan-source/recommended"],
   "rules": {
     "no-eval": "error",
     "no-implied-eval": "error",
@@ -35,7 +33,7 @@ TODO: move the extends extras to our shareable config
   },
   // Please include the environments that you use when using this plugin.
   // Doing so will enhance the results.
-  "env": { 
+  "env": {
     "node": true,
     "browser": true,
     "es6": true
@@ -55,10 +53,12 @@ TODO: move the extends extras to our shareable config
   ]
 }
 ```
+
 ## Optional setup
 
 ## Rules
 
 ## Replaces
+
 This package aims to replace the functionality found in the below packages:
 ...
