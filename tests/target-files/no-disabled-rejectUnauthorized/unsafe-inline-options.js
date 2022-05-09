@@ -1,3 +1,3 @@
-import tls from "tls";
+import tls from 'tls';
 
 const socket = new tls.TLSSocket(undefined, { isServer: true, rejectUnauthorized: false });

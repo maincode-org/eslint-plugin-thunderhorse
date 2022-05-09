@@ -1,3 +1,3 @@
-import { exec } from "child_process";
+import { exec } from 'child_process';
 
 exec('echo "Hello!"');
