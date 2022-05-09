@@ -12,6 +12,7 @@ ruleTester.run('no-unsafe-serialize-javascript', rule, {
     { code: readFileSync('tests/target-files/no-unsafe-serialize-javascript/safe-identifier-options.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unsafe-serialize-javascript/safe-different-import-identifier.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unsafe-serialize-javascript/safe-no-options.js', 'utf-8') },
+    { code: "eval('console.log(2+2);');" },
   ],
   invalid: [
     { code: readFileSync('tests/target-files/no-unsafe-serialize-javascript/unsafe-inline-options.js', 'utf-8'), errors: [{ messageId: 'error' }] },
