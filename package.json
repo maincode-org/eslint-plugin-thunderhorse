@@ -2,7 +2,8 @@
   "name": "eslint-plugin-itu-security",
   "version": "1.0.0",
   "description": "A complete set of security related ESLint rules, by the IT University in Copenhagen",
-  "author": "Mathias Høyrup Nielsen & Mark Kragerup",
+  "keywords": ["eslint", "eslint-plugin", "security"],
+  "author": "Mathias Høyrup Nielsen & Mark Kragerup w. many more contributors",
   "license": "ISC",
   "repository": {
     "type": "git",
