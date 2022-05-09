@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node index.ts",
-    "test": "jest & eslint .",
+    "test": "jest",
     "format": "prettier --write **/*.{md,js,yml,ts} && eslint --fix .",
     "lint": "eslint .",
     "prepare": "husky install"
