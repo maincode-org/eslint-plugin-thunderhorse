@@ -44,8 +44,13 @@ export const rules = {
 
 export const configs = {
   recommended: {
-    plugins: ['itu-security'],
+    plugins: ['itu-security', 'eslint'],
+    extends: ['plugin:anti-trojan-source/recommended'],
     rules: {
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-caller': 'error',
+      'no-new-func': 'error',
       'itu-security/detect-missing-helmet': 'error',
       'itu-security/no-buffer-instantiation': 'error',
       'itu-security/no-cookies': 'error',
