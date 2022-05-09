@@ -15,6 +15,7 @@ export const rule = createRule({
       },
     };
   },
+
   name: 'no-buffer-instantiation',
   meta: {
     docs: {
