@@ -49,7 +49,26 @@ export const rule = createRule({
             error: 'Found insecure URL',
         },
         type: 'problem',
-        schema: [],
+        schema: [
+            {
+                type: "object",
+                properties: {
+                    blocklist: {
+                        type: "array",
+                        items: {
+                            type: "string"
+                        }
+                    },
+                    exceptions: {
+                        type: "array",
+                        items: {
+                            type: "string"
+                        }
+                    },
+                },
+                additionalProperties: false
+            }
+        ],
     },
     defaultOptions: [],
 });

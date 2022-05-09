@@ -10,7 +10,7 @@ export const rule = createRule({
         let members: (TSESTree.Identifier)[] = [];
 
         return {
-            // Find the child-process member(s).
+            // Find the child-process member(s) in require.
             VariableDeclarator(node) {
                 if (node.init.type !== AST_NODE_TYPES.CallExpression) return;
                 if (node.init.callee.type !== AST_NODE_TYPES.Identifier || node.init.callee.name !== "require") return;
@@ -25,6 +25,13 @@ export const rule = createRule({
 
                 // Filter out all properties that does not adhere to expected node types.
                 members = members.filter(p => p);
+            },
+            // Find the child-process member(s) in import
+            ImportDeclaration(node) {
+                if (node.specifiers.length === 0) return;
+                if (node.source.value !== "child_process") return;
+
+                members = node.specifiers.map(specifier => specifier.local);
             },
             // Inline child-process import member access - ex.: require('child_process').exec('echo "Hello"');
             MemberExpression(node) {
@@ -43,7 +50,7 @@ export const rule = createRule({
                     });
                 }
             },
-            // Analyse child-processes
+            // Analyze child-processes
             CallExpression(node) {
                 if (node.callee.type !== AST_NODE_TYPES.Identifier) return;
                 if (members.length > 0 && !findIdentifierInList(members, node.callee)) return;
