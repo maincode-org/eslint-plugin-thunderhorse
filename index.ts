@@ -1,3 +1,4 @@
+import { rule as detect_missing_helmet } from './src/rules/detect-missing-helmet';
 import { rule as no_buffer_instantiation } from './src/rules/no-buffer-instantiation';
 import { rule as no_cookies } from './src/rules/no-cookies';
 import { rule as no_disable_csrf_before_methods } from './src/rules/no-disable-csrf-before-method';
@@ -19,6 +20,7 @@ import { rule as no_unsafe_regex } from './src/rules/no-unsafe-regex';
 import { rule as no_unsafe_serialize_javascript } from './src/rules/no-unsafe-serialize-javascript';
 
 export const rules = {
+  'detect-missing-helmet': detect_missing_helmet,
   'no-buffer-instantiation': no_buffer_instantiation,
   'no-cookies': no_cookies,
   'no-disable-csrf-before-method': no_disable_csrf_before_methods,
@@ -44,6 +46,7 @@ export const configs = {
   recommended: {
     plugins: ['itu-security'],
     rules: {
+      'itu-security/detect-missing-helmet': 'error',
       'itu-security/no-buffer-instantiation': 'error',
       'itu-security/no-cookies': 'error',
       'itu-security/no-disable-csrf-before-method': 'error',
