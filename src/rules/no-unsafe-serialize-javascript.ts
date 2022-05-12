@@ -9,21 +9,17 @@ export const rule = createRule({
 
     return {
       CallExpression(node) {
-        if (node.callee.type !== AST_NODE_TYPES.Identifier || node.callee.name !== serializeIdentifier.name) return;
+        if (node.callee.type !== AST_NODE_TYPES.Identifier || !serializeIdentifier || node.callee.name !== serializeIdentifier.name) return;
+        if (node.arguments.length < 2) return;
 
-        if (node.arguments.length > 1 && node.arguments[1].type === AST_NODE_TYPES.ObjectExpression) {
-          if (optionsAreUnsafe(node.arguments[1].properties)) {
+        if (node.arguments[1].type === AST_NODE_TYPES.ObjectExpression) {
+          if (node.arguments[1].properties && optionsAreUnsafe(node.arguments[1].properties)) {
             context.report({
               messageId: 'error',
               node: node,
             });
           }
-        } else if (
-          node.arguments.length > 1 &&
-          node.arguments[1].type === AST_NODE_TYPES.Identifier &&
-          optionsIdentifiers.length > 0 &&
-          findIdentifierInList(optionsIdentifiers, node.arguments[1])
-        ) {
+        } else if (node.arguments[1].type === AST_NODE_TYPES.Identifier && optionsIdentifiers.length > 0 && findIdentifierInList(optionsIdentifiers, node.arguments[1])) {
           context.report({
             messageId: 'error',
             node: node,

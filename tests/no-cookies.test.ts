@@ -1,4 +1,5 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
+import { readFileSync } from 'fs';
 import rule from '../src/rules/no-cookies';
 
 const ruleTester = new ESLintUtils.RuleTester({
@@ -7,5 +8,5 @@ const ruleTester = new ESLintUtils.RuleTester({
 
 ruleTester.run('no-cookies', rule, {
   valid: [],
-  invalid: [{ code: 'document.cookie = "username=John Smith; expires=Thu, 18 Dec 2022 12:00:00 UTC; path=/";', errors: [{ messageId: 'error' }] }],
+  invalid: [{ code: readFileSync('tests/target-files/no-cookies/unsafe.js', 'utf-8'), errors: [{ messageId: 'error' }] }],
 });

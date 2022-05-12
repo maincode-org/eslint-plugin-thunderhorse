@@ -1,4 +1,5 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
+import { readFileSync } from 'fs';
 import rule from '../src/rules/no-unsafe-random';
 
 const ruleTester = new ESLintUtils.RuleTester({
@@ -7,5 +8,5 @@ const ruleTester = new ESLintUtils.RuleTester({
 
 ruleTester.run('no-unsafe-random', rule, {
   valid: [],
-  invalid: [{ code: 'Math.random()', errors: [{ messageId: 'error' }] }],
+  invalid: [{ code: readFileSync('tests/target-files/no-unsafe-random/unsafe.js', 'utf-8'), errors: [{ messageId: 'error' }] }],
 });
