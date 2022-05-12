@@ -1,15 +1,11 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
-import { readFileSync, readdirSync } from 'fs';
+import { readFileSync } from 'fs';
 import rule from '../src/rules/no-unsafe-serialize-javascript';
+import { allowAllFilesInDir } from '../src/helpers';
 
 const ruleTester = new ESLintUtils.RuleTester({
   parser: '@typescript-eslint/parser',
 });
-
-const allowAllFilesInDir = (path: string) => {
-  const files = readdirSync(path);
-  return files.map((name) => ({ code: readFileSync(`${path}/${name}`, 'utf-8') }));
-};
 
 ruleTester.run('no-unsafe-serialize-javascript', rule, {
   valid: [
