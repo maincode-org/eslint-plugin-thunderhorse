@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-itu-security",
+  "name": "eslint-plugin-thunderhorse",
   "version": "1.0.0",
-  "description": "A complete set of security related ESLint rules, by the IT University in Copenhagen",
+  "description": "A complete set of security related ESLint rules, developed and maintained by the IT University in Copenhagen",
   "keywords": ["eslint", "eslint-plugin", "security"],
   "author": "Mathias Høyrup Nielsen & Mark Kragerup w. many more contributors",
   "license": "ISC",
@@ -26,17 +26,18 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^5.19.0",
     "eslint": "^8.13.0",
     "eslint-rule-dev-toolkit": "^1.0.0",
-    "safe-regex": "^2.1.1",
-    "ts-node": "^10.7.0"
+    "safe-regex": "^2.1.1"
   },
   "peerDependencies": {
     "eslint-plugin-anti-trojan-source": "^1.1.0",
     "eslint": ">=8"
   },
   "devDependencies": {
+    "typescript": "^4.6.4",
+    "ts-node": "^10.7.0",
+    "@typescript-eslint/utils": "^5.19.0",
     "@types/eslint": "^8.4.1",
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
@@ -47,8 +48,7 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
-    "ts-jest": "^27.1.4",
-    "typescript": "^4.6.4"
+    "ts-jest": "^27.1.4"
   },
   "lint-staged": {
     "*.{js,css,md,ts}": [

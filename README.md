@@ -1,4 +1,4 @@
-<h1 align="center">ESLint Plugin ITU Security</h1>
+<h1>ESLint Plugin Thunderhorse</h1>
 This configuration and extended set of ESLint rules aim to provide better security aid and develop experience than current ESLint security packages.
 
 It is maintained by the Applied Security faculty of the IT University in Copenhagen.
@@ -13,38 +13,42 @@ See the **replaces** section at the end for insights on which packages this one 
 - Requires ESLint >= 8
 
 ```bash
-npm i -D eslint-plugin-itu-security
+npm i -D eslint-plugin-thunderhorse
 ```
 
 ## Recommended setup
 
-For the default setup, please add the following to your `.eslintrc`:
+For the default setup, please add the following to your `.eslintrc.json`:
 
-TODO: move the extends extras to our shareable config
+> Note that the extends are our recommendation for a secure default setup. Only `plugin:thunderhorse/recommended` is required to use our package.
 
 ```json
 {
-  "extends": ["eslint:recommended", "plugin:itu-security/recommended", "plugin:anti-trojan-source/recommended"],
+  "extends": ["eslint:recommended", "plugin:thunderhorse/recommended", "plugin:anti-trojan-source/recommended"],
   "rules": {
     "no-eval": "error",
     "no-implied-eval": "error",
     "no-caller": "error",
     "no-new-func": "error"
   },
-  // Please include the environments that you use when using this plugin.
-  // Doing so will enhance the results.
   "env": {
     "node": true,
     "browser": true,
     "es6": true
-  },
-  // Optional overrides, for projects which includes typescript:
+  }
+}
+```
+
+## Typescript support
+
+For typescript based projects, add the `overrides` property at the end of your `.eslintrc.json`:
+
+```json
+{
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@typescript-eslint/recommended"],
-      // Please include the "project" configuration when using typescript.
-      // See more at https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser#parseroptionsproject
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": ["./tsconfig.json"]
@@ -53,8 +57,6 @@ TODO: move the extends extras to our shareable config
   ]
 }
 ```
-
-## Optional setup
 
 ## Rules
 

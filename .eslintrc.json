@@ -16,6 +16,7 @@
   "rules": {
     "no-unused-vars": "off"
   },
+  "ignorePatterns": ["node_modules", "*.md"],
   "overrides": [
     {
       "files": [

@@ -44,7 +44,7 @@ export const rules = {
 
 export const configs = {
   recommended: {
-    plugins: ['itu-security'],
+    plugins: ['thunderhorse'],
     extends: ['plugin:anti-trojan-source/recommended'],
     rules: {
       'no-eval': 'error',
