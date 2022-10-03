@@ -16,6 +16,7 @@ ruleTester.run('no-disable-ssl', rule, {
     ...allowAllFilesInDir('tests/target-files/no-disable-csrf-before-method'),
     ...allowAllFilesInDir('tests/target-files/no-disable-markup-escape'),
     ...allowAllFilesInDir('tests/target-files/no-disable-rejectUnauthorized'),
+    ...allowAllFilesInDir('tests/target-files/no-insecure-cipher'),
     ...allowAllFilesInDir('tests/target-files/no-insecure-url'),
     ...allowAllFilesInDir('tests/target-files/no-postmessage-origin-wildcard'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-object-injection'),

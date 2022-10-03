@@ -9,13 +9,13 @@ const ruleTester = new ESLintUtils.RuleTester({
 
 ruleTester.run('no-unknown-src-in-fs', rule, {
   valid: [
-    // readFile()
+    // fs.readFile()
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file/safe-variable.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file/safe-member-variable.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file/safe-array.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file/safe-member-array.js', 'utf-8') },
 
-    // readFileSync()
+    // fs.readFileSync()
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file-sync/safe-variable.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file-sync/safe-member-variable.js', 'utf-8') },
     { code: readFileSync('tests/target-files/no-unknown-src-in-fs/read-file-sync/safe-array.js', 'utf-8') },
@@ -28,6 +28,7 @@ ruleTester.run('no-unknown-src-in-fs', rule, {
     ...allowAllFilesInDir('tests/target-files/no-disable-markup-escape'),
     ...allowAllFilesInDir('tests/target-files/no-disable-rejectUnauthorized'),
     ...allowAllFilesInDir('tests/target-files/no-disable-ssl'),
+    ...allowAllFilesInDir('tests/target-files/no-insecure-cipher'),
     ...allowAllFilesInDir('tests/target-files/no-insecure-url'),
     ...allowAllFilesInDir('tests/target-files/no-postmessage-origin-wildcard'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-object-injection'),
