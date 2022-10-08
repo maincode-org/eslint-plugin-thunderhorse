@@ -1,19 +1,16 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { readFileSync } from 'fs';
-import rule from '../src/rules/no-unsafe-buffer-allocation';
+import rule from '../src/rules/no-insecure-cipher';
 import { allowAllFilesInDir } from '../src/helpers';
 
 const ruleTester = new ESLintUtils.RuleTester({
   parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run('no-unsafe-buffer-allocation', rule, {
+ruleTester.run('no-insecure-cipher', rule, {
   valid: [
-    { code: readFileSync('tests/target-files/no-unsafe-buffer-allocation/safe-one-param.js', 'utf-8') },
-    { code: readFileSync('tests/target-files/no-unsafe-buffer-allocation/safe-two-params.js', 'utf-8') },
-    { code: readFileSync('tests/target-files/no-unsafe-buffer-allocation/safe-three-params.js', 'utf-8') },
+    { code: readFileSync('tests/target-files/no-insecure-cipher/safe.js', 'utf-8') },
     ...allowAllFilesInDir('tests/target-files/detect-missing-helmet'),
-    ...allowAllFilesInDir('tests/target-files/no-buffer-instantiation'),
     ...allowAllFilesInDir('tests/target-files/no-cookies'),
     ...allowAllFilesInDir('tests/target-files/no-disable-csrf-before-method'),
     ...allowAllFilesInDir('tests/target-files/no-disable-markup-escape'),
@@ -29,10 +26,14 @@ ruleTester.run('no-unsafe-buffer-allocation', rule, {
     ...allowAllFilesInDir('tests/target-files/no-unknown-src-in-log'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-src-in-node-vm-runinthiscontext'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-src-in-require'),
+    ...allowAllFilesInDir('tests/target-files/no-unsafe-buffer-allocation'),
     ...allowAllFilesInDir('tests/target-files/no-unsafe-child-process'),
     ...allowAllFilesInDir('tests/target-files/no-unsafe-random'),
     ...allowAllFilesInDir('tests/target-files/no-unsafe-regex'),
     ...allowAllFilesInDir('tests/target-files/no-unsafe-serialize-javascript'),
   ],
-  invalid: [{ code: readFileSync('tests/target-files/no-unsafe-buffer-allocation/unsafe.js', 'utf-8'), errors: [{ messageId: 'error' }] }],
+  invalid: [
+    { code: readFileSync('tests/target-files/no-insecure-cipher/unsafe-inline.js', 'utf-8'), errors: [{ messageId: 'error' }] },
+    { code: readFileSync('tests/target-files/no-insecure-cipher/unsafe-variable.js', 'utf-8'), errors: [{ messageId: 'error' }] },
+  ],
 });
