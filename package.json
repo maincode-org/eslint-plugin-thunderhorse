@@ -1,13 +1,13 @@
 {
   "name": "eslint-plugin-thunderhorse",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A complete set of security related ESLint rules, developed and maintained by the IT University in Copenhagen",
   "keywords": [
     "eslint",
     "eslint-plugin",
     "security"
   ],
-  "author": "Mathias Høyrup Nielsen & Mark Kragerup w. many more contributors",
+  "author": "Mathias Høyrup Nielsen & Mark Kragerup",
   "license": "ISC",
   "repository": {
     "type": "git",
