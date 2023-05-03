@@ -19,6 +19,7 @@ ruleTester.run('no-disable-ssl', rule, {
     ...allowAllFilesInDir('tests/target-files/no-insecure-cipher'),
     ...allowAllFilesInDir('tests/target-files/no-insecure-url'),
     ...allowAllFilesInDir('tests/target-files/no-postmessage-origin-wildcard'),
+    ...allowAllFilesInDir('tests/target-files/no-sql-injection'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-object-injection'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-src-in-document-domain'),
     ...allowAllFilesInDir('tests/target-files/no-unknown-src-in-fs/read-file'),
